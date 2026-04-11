@@ -39,6 +39,24 @@ $("#submitTask").on("click", function () {
     renderTask();
 });
 
+// edit btn, NOT YET FINISHED
+$("#currTasks").on("click", ".edit-btn", function () {
+    let index = $(this).parent().data("index");
+    let currentTasks = tasks[index];
+});
+
+// DELETE (with animation)
+$("#currTasks").on("click", ".delete-btn", function () {
+    let index = $(this).parent().data("index");
+    let item = $(this).parent();
+
+    item.slideUp(300, function () {
+        removeSkill(index, renderSkills);
+    });
+    
+    // CURRENT BUG: adding a task after deleting one will bring the deleted back again
+});
+
 
 function renderTask() {
     $("#currTasks").html(""); // clear previous 
