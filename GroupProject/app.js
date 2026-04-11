@@ -28,12 +28,13 @@ const tasks = [
 $("#submitTask").on("click", function () {
     taskTitle = titleField.val().trim();
     taskDesc = descField.val().trim();
-    taskDeadline = deadlineField.val().trim();
-    taskPriority = priorityField.val().trim();
+    taskDeadline = deadlineField.val();
+    taskPriority = priorityField.val();
     tasks.push({
         taskTitle: taskTitle,
         taskDesc: taskDesc,
-        taskDeadline: taskDeadline,
+        taskDeadline: new Date(taskDeadline),
+        
         taskPriority: taskPriority
     });
     renderTask();
@@ -61,14 +62,27 @@ $("#currTasks").on("click", ".delete-btn", function () {
 function renderTask() {
     $("#currTasks").html(""); // clear previous 
 
+    
+    let status = "Ongoing";
 
     tasks.forEach((task, index) => { // keeping track of data index for when needs to delete (by class)
+        let today = new Date();
+        today.setHours(0, 0, 0, 0);
+        task.taskDeadline.setHours(0, 0, 0, 0);
+        // some bugs over dates and "Due today"
+        if (task.taskDeadline > today) {
+            status = "Ongoing";
+        } else if (task.taskDeadline < today) {
+            status = "Completed";
+        } else {
+            status = "Due Today"; 
+        }
 
         let taskItem = $(`
             <div class="task" data-index="${index}"> 
                 <h3>${task.taskTitle}</h3>
                 <p>${task.taskDesc}</p>
-                <p><strong>Deadline:</strong> ${task.taskDeadline}</p>
+                <p><strong>Deadline:</strong> ${task.taskDeadline} - ${status}</p>
                 <p><strong>Priority:</strong> ${task.taskPriority}</p>
 
                 <button class="edit-btn">Edit</button>
