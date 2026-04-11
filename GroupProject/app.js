@@ -44,10 +44,10 @@ function renderTask() {
     $("#currTasks").html(""); // clear previous 
 
 
-    tasks.forEach((task, index) => { 
+    tasks.forEach((task, index) => { // keeping track of data index for when needs to delete (by class)
 
         let taskItem = $(`
-            <div class="task" data-index="${index}"> // keeping track of data index for when needs to delete
+            <div class="task" data-index="${index}"> 
                 <h3>${task.taskTitle}</h3>
                 <p>${task.taskDesc}</p>
                 <p><strong>Deadline:</strong> ${task.taskDeadline}</p>
