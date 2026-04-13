@@ -15,12 +15,14 @@ let taskPriority = 1;
 
 
 const tasks = [
+    /*
     {
         taskTitle: "Sample Task",
         taskDesc: "This is a task description",
         taskDeadline: new Date("01/01/2001"),
         taskPriority: 1
     }
+        */
 ]
 
 
@@ -98,9 +100,9 @@ function renderTask() {
 
 /*
 
+examples from my own previous projects
 
-
-function renderTask() {
+function render() {
     taskContainer.innerHTML += `
         <div class="card text-center col" style="width: 18rem;">
             <div class="card-body">

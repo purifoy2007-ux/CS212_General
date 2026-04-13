@@ -7,3 +7,110 @@ div {
 	text-align: center;
 }
 
+@import url('https://googleapis.com');
+
+:root {
+  --bg-color: #ffffff; 
+  --bg-overlay: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+  --bg-image-path: url('background.png');
+  --banner-color: #a9c5e8;
+  --accent-btn: #fab1e7;
+  --text-color: #000000;
+  --section-bg: rgba(255, 255, 255, 0.3); 
+}
+
+body.dark-mode {
+  --bg-color: #2c2c2c; 
+  --bg-overlay: linear-gradient(rgba(44, 44, 44, 0.7), rgba(44, 44, 44, 0.7));
+  --banner-color: #496080;
+  --accent-btn: #c452a6;
+  --text-color: #ffffff;
+  --section-bg: rgba(0, 0, 0, 0.4); 
+}
+
+body {
+  font-family: 'Press Start 2P', cursive;
+  background-image: var(--bg-overlay), var(--bg-image-path);
+  background-color: var(--bg-color);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  image-rendering: pixelated; 
+  color: var(--text-color);
+  transition: all 0.3s ease; 
+  margin: 0;
+}
+
+.welcome-banner {
+  background-color: var(--banner-color);
+  padding: 2rem;
+  text-align: center;
+  border-bottom: 4px solid var(--text-color);
+}
+
+.nav-buttons {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.view-tasks-btn, .add-task-btn {
+  background-color: var(--banner-color);
+  font-family: 'Press Start 2P', cursive;
+  padding: 15px;
+  border: 4px solid var(--text-color);
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.task-section {
+  margin: 20px;
+  background: var(--section-bg); 
+  padding: 15px;
+  border: 4px solid var(--text-color);
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.badge {
+  font-size: 8px; 
+  padding: 4px 6px;
+  border: 2px solid var(--text-color);
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+/* Labels */
+.label-urgent { background-color: #ff4d4d; color: #ffffff; }
+.label-work   { background-color: #4da6ff; color: #ffffff; }
+.label-home   { background-color: #5cd65c; color: #000000; }
+.label-school { background-color: #9d5cd6; color: #ffffff; }
+
+input[type="checkbox"] {
+  accent-color: var(--accent-btn); 
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* Strikethrough effect */
+input[type="checkbox"]:checked + .task-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.status-btn {
+  background-color: var(--accent-btn);
+  font-family: 'Press Start 2P', cursive;
+  border: 2px solid var(--text-color);
+  padding: 5px 10px;
+  font-size: 10px;
+  cursor: pointer;
+}
