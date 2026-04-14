@@ -28,11 +28,13 @@ const tasks = [
 
 
 $("#submitTask").on("click", function () {
+    // get the info from the form
     taskTitle = titleField.val().trim();
     taskDesc = descField.val().trim();
     taskDeadline = deadlineField.val();
     taskPriority = priorityField.val();
     tasks.push({
+        // actually add the info to the array using the vars
         taskTitle: taskTitle,
         taskDesc: taskDesc,
         taskDeadline: new Date(taskDeadline),
@@ -44,8 +46,7 @@ $("#submitTask").on("click", function () {
 
 // edit btn, NOT YET FINISHED
 $("#currTasks").on("click", ".edit-btn", function () {
-    let index = $(this).parent().data("index");
-    let currentTasks = tasks[index];
+    
 });
 
 // DELETE (with animation)
@@ -54,10 +55,11 @@ $("#currTasks").on("click", ".delete-btn", function () {
     let item = $(this).parent();
 
     item.slideUp(300, function () {
-        removeSkill(index, renderSkills);
+        //removeSkill(index, renderSkills); I'm just going to code the function in-line
+        tasks.splice(index, 1); // fixes the issue with tasks appearing back
     });
     
-    // CURRENT BUG: adding a task after deleting one will bring the deleted back again
+    // CURRENT BUG: adding a task after deleting one will bring the deleted back again (solved)
 });
 
 
@@ -67,7 +69,7 @@ function renderTask() {
     
     let status = "Ongoing";
 
-    tasks.forEach((task, index) => { // keeping track of data index for when needs to delete (by class)
+    tasks.forEach((task, index) => { // keeping track of data index
         let today = new Date();
         today.setHours(0, 0, 0, 0);
         task.taskDeadline.setHours(0, 0, 0, 0);
