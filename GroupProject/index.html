@@ -4,62 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
-    <link href="https://jsdelivr.net" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="container py-4">
+    <div class="container">
 
-        <div class="header text-center mb-4">
-            <h1>TASKS</h1>
-            <button id="themeToggle" class="btn btn-sm btn-outline-secondary">Toggle Dark Mode</button>
+        <div class="container text-center header">
+            <h1> Tasks </h1>
+            <h3>This is the temporary page for tasks!</h3>
+            <button id="themeToggle" class="status-btn">Toggle Dark Mode</button>
         </div>
 
-
-        <div class="row mb-4 text-center">
+        <div class="row my-4 text-center">
             <div class="col-md-4">
                 <div class="task-section">
                     <h5>Pending</h5>
-                    <span id="pendingCount" class="badge bg-primary">0</span>
+                    <span id="pendingCount" class="badge">0</span>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="task-section">
                     <h5>Completed</h5>
-                    <span id="completedCount" class="badge bg-success">0</span>
+                    <span id="completedCount" class="badge">0</span>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="task-section">
                     <h5>Total</h5>
-                    <span id="totalCount" class="badge bg-secondary">0</span>
+                    <span id="totalCount" class="badge">0</span>
                 </div>
             </div>
         </div>
 
-
-        <div class="main-content task-section mb-4">
-            <h3>Create Task</h3>
-            <div class="createTask d-flex flex-column gap-2">
+        <div class="main-content container">
+            <h1> Create Task </h1>
+            <div class="container createTask">
+                <!-- <div id="taskName" class="mb-4"> -->
                 <input type="text" id="titleField" class="form-control" placeholder="Task Name">
-                <input type="text" id="descField" class="form-control" placeholder="Description">
-                <input type="date" id="deadlineField" class="form-control">
-                <input type="number" id="priorityField" class="form-control" placeholder="Priority (1 = High)">
-                <button id="submitTask" class="add-task-btn">Add Task</button>
+                <input type="text" id="descField" class="form-control" placeholder="Task Description">
+                <input type="date" id="deadlineField" class="form-control" placeholder="Task Due Date">
+                <input type="number" id="priorityField" class="form-control" placeholder="Priority (1 = Highest)">
+                <button id="submitTask">Create Task</button>
             </div>
         </div>
 
-
-        <div class="task-section">
+        <div class="footer container text-center py-4 gradient-footer">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3>Current Tasks</h3>
+                <h1> Current Tasks </h1>
                 <button id="sortDateBtn" class="status-btn">Sort by Date</button>
             </div>
-            <div id="currTasks"></div>
+            
+            <p id="currTasks"></p>
+            <!-- the javascript will modify the contents of currTasks-->
         </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="./app.js"></script>
+    <script src="./GroupProject/app.js"></script> 
+    <!-- the two app.js references are to make sure it works both locally and on github -->
 </body>
 </html>
