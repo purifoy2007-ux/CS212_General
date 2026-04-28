@@ -8,7 +8,7 @@
     --banner-color: #a9c5e8;
     --accent-btn: #fab1e7;
     --text-color: #000000;
-    --section-bg: rgba(255, 255, 255, 0.3);
+    --section-bg: rgba(255, 255, 255, 0.8);
     --overdue-color: #ff4d4d;
 }
 
@@ -18,7 +18,7 @@ body.dark-mode {
     --banner-color: #496080;
     --accent-btn: #c452a6;
     --text-color: #ffffff;
-    --section-bg: rgba(0, 0, 0, 0.4);
+    --section-bg: rgba(0, 0, 0, 0.6);
 }
 
 body {
