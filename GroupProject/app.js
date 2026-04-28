@@ -15,8 +15,15 @@ let taskPriority = 1;
 const tasks = [
     /* { taskTitle: "Sample Task", taskDesc: "This is a task description", taskDeadline: new Date("01/01/2001"), taskPriority: 1 } */
 ]
-
-$('#themeToggle').on('click', () => $('body').toggleClass('dark-mode'));
+$(document).ready(function() {
+    $('#themeToggle').on('click', function() {
+        $('body').toggleClass('dark-mode');
+        if ($('body').hasClass('dark-mode')) {
+            $(this).text('Switch to Light Mode');
+        } else {
+            $(this).text('Toggle Dark Mode');
+        }
+    });
 
 $('#sortDateBtn').on('click', () => {
     tasks.sort((a, b) => a.taskDeadline - b.taskDeadline);
