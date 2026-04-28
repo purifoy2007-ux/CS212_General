@@ -13,22 +13,12 @@ let taskDeadline = new Date("01/01/2001");
 let taskPriority = 1;
 
 const tasks = [
-    /*
-    {
-        taskTitle: "Sample Task",
-        taskDesc: "This is a task description",
-        taskDeadline: new Date("01/01/2001"),
-        taskPriority: 1
-    }
-    */
+    /* { taskTitle: "Sample Task", taskDesc: "This is a task description", taskDeadline: new Date("01/01/2001"), taskPriority: 1 } */
 ]
 
-// --- NEW: Theme & Sort Listeners ---
-$('#themeToggle').on('click', function() {
-    $('body').toggleClass('dark-mode');
-});
+$('#themeToggle').on('click', () => $('body').toggleClass('dark-mode'));
 
-$('#sortDateBtn').on('click', function() {
+$('#sortDateBtn').on('click', () => {
     tasks.sort((a, b) => a.taskDeadline - b.taskDeadline);
     renderTask();
 });
@@ -46,24 +36,16 @@ $("#submitTask").on("click", function () {
         taskDesc: taskDesc,
         taskDeadline: new Date(taskDeadline + "T00:00:00"),
         taskPriority: taskPriority,
-        completed: false // added to track pending/completed layout
+        completed: false
     });
 
     renderTask();
-    
-    // Clear inputs after adding
-    titleField.val("");
-    descField.val("");
-    deadlineField.val("");
-    priorityField.val("");
+    titleField.val(""); descField.val(""); deadlineField.val(""); priorityField.val("");
 });
 
 // edit btn, NOT YET FINISHED
-$("#currTasks").on("click", ".edit-btn", function () {
-    // Logic for editing goes here
-});
+$("#currTasks").on("click", ".edit-btn", function () { });
 
-// NEW: Toggle completion for the Dashboard layout
 $("#currTasks").on("change", ".task-checkbox", function () {
     let index = $(this).closest(".task").data("index");
     tasks[index].completed = $(this).is(':checked');
@@ -74,57 +56,45 @@ $("#currTasks").on("change", ".task-checkbox", function () {
 $("#currTasks").on("click", ".delete-btn", function () {
     let index = $(this).parent().data("index");
     let item = $(this).parent();
-
     item.slideUp(300, function () {
         //removeSkill(index, renderSkills); I'm just going to code the function in-line
         tasks.splice(index, 1); // fixes the issue with tasks appearing back
-        renderTask(); 
-// CURRENT BUG: adding a task after deleting one will bring the deleted back again (solved)
+        renderTask(); // CURRENT BUG: adding a task after deleting one will bring the deleted back again (solved)
     });
 });
 
 function renderTask() {
-    $("#currTasks").html(""); 
-// clear previous
-    
-    // counters for the new Dashboard layout
-    let pending = 0;
-    let completed = 0;
+    $("#currTasks").html(""); // clear previous
+    let pCount = 0; let cCount = 0;
     let today = new Date();
     today.setHours(0, 0, 0, 0);
 
     tasks.forEach((task, index) => {
-        // Track status for counters
-        if (task.completed) completed++; else pending++;
+        if (task.completed) cCount++; else pCount++;
 
         // keeping track of data index
         let status = "Ongoing";
         let isOverdue = false;
-        
         let deadline = new Date(task.taskDeadline);
         deadline.setHours(0, 0, 0, 0);
 
         // some bugs over dates and "Due today"
         if (task.completed) {
             status = "Completed";
-        } else if (deadline > today) {
-            status = "Ongoing";
         } else if (deadline < today) {
-            status = "Overdue"; 
-// modified "Completed" to "Overdue" for pending tasks
+            status = "OVERDUE";
             isOverdue = true;
-        } else {
+        } else if (deadline.getTime() === today.getTime()) {
             status = "Due Today";
         }
 
         let taskItem = $(`
-            <div class="task ${isOverdue ? 'overdue' : ''}" data-index="${index}">
+            <div class="task ${isOverdue ? 'overdue-task' : ''}" data-index="${index}">
                 <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
                 <h3 style="${task.completed ? 'text-decoration: line-through; opacity: 0.6;' : ''}">${task.taskTitle}</h3>
                 <p>${task.taskDesc}</p>
-                <p><strong>Deadline:</strong> ${deadline.toDateString()} - <b>${status}</b></p>
+                <p><strong>Deadline:</strong> ${deadline.toDateString()} - ${status}</p>
                 <p><strong>Priority:</strong> ${task.taskPriority}</p>
-                <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>
             </div>
         `);
@@ -133,12 +103,17 @@ function renderTask() {
         $("#currTasks").append(taskItem);
     });
 
-    // Update the Dashboard Layout counts
-    $("#pendingCount").text(pending);
-    $("#completedCount").text(completed);
+    $("#pendingCount").text(pCount);
+    $("#completedCount").text(cCount);
     $("#totalCount").text(tasks.length);
 }
 
+$("#searchField").on("keyup", function() {
+    let value = $(this).val().toLowerCase();
+    $(".task").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+});
 /* examples from my own previous projects
 function render() {
   taskContainer.innerHTML += `
