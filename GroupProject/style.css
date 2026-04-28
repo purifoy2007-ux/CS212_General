@@ -13,14 +13,17 @@ body.dark-mode {
 }
 
 body {
+    font-family: 'Press Start 2P', cursive !important;
     background: var(--bg-overlay), var(--bg-image-path);
     background-color: var(--bg-color);
     background-size: cover;
     background-attachment: fixed;
     color: var(--text-color);
     transition: all 0.3s ease;
+    image-rendering: pixelated;
+    font-size: 12px;
+    font-family: 'Press Start 2P', cursive !important;
 }
-
 .header {
     background-color: #a9c5e8 !important;
     border: 2px solid black;
